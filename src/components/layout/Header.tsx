@@ -5,24 +5,15 @@ import { Bell, Search } from "lucide-react";
 interface HeaderProps {
   title: string;
   subtitle?: string;
-  userName?: string;
 }
 
-export function Header({ title, subtitle, userName = "Lucas Bennett" }: HeaderProps) {
+export function Header({ title, subtitle }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between px-8 py-6">
-      {/* User greeting and title */}
-      <div className="flex items-center gap-4">
-        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center overflow-hidden">
-          <span className="text-sm font-bold text-slate-600">
-            {userName.split(" ").map(n => n[0]).join("")}
-          </span>
-        </div>
-        <div>
-          <p className="text-sm text-slate-500">{userName}</p>
-          <h1 className="text-2xl font-bold text-slate-900">{title}</h1>
-          {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
-        </div>
+    <header className="flex items-center justify-between px-8 py-6">
+      {/* Title */}
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">{title}</h1>
+        {subtitle && <p className="text-sm text-slate-500 mt-0.5">{subtitle}</p>}
       </div>
 
       <div className="flex items-center gap-3">
@@ -35,12 +26,6 @@ export function Header({ title, subtitle, userName = "Lucas Bennett" }: HeaderPr
             className="w-64 rounded-2xl bg-white py-3 pl-11 pr-4 text-sm placeholder:text-slate-400 shadow-soft focus:outline-none focus:ring-2 focus:ring-lime-400"
           />
         </div>
-
-        {/* Notifications */}
-        <button className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white shadow-soft hover:shadow-card transition-shadow">
-          <Bell className="h-5 w-5 text-slate-600" />
-          <span className="absolute top-2.5 right-2.5 h-2.5 w-2.5 rounded-full bg-rose-500 border-2 border-white" />
-        </button>
 
         {/* Date picker style button */}
         <button className="flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-soft hover:shadow-card transition-shadow">

@@ -9,7 +9,7 @@ interface PagePlaceholderProps {
 
 export function PagePlaceholder({ title, subtitle, section }: PagePlaceholderProps) {
   return (
-    <div className="min-h-screen">
+    <div>
       <Header title={title} subtitle={subtitle} />
       <div className="px-8 pb-8">
         <div className="card p-12">

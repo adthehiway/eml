@@ -31,7 +31,7 @@
 @layer components {
   /* Cards - Flux style with more rounded corners */
   .card {
-    @apply bg-white rounded-3xl shadow-card border-0;
+    @apply bg-sage-50/80 rounded-3xl border-0;
   }
 
   .card-header {

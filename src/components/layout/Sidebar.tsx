@@ -18,6 +18,8 @@ import {
   Wallet,
   ChevronDown,
   Sparkles,
+  Bell,
+  AlertCircle,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -164,115 +166,117 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-0 top-0 z-40 h-screen w-72 bg-sage-100 p-4">
-      <div className="flex h-full flex-col">
-        {/* Logo */}
-        <div className="flex items-center gap-3 px-4 py-3 mb-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-lime-400">
-            <Sparkles className="h-5 w-5 text-slate-900" />
-          </div>
-          <span className="text-xl font-bold text-slate-900">EML</span>
+    <aside className="fixed left-4 top-4 bottom-4 z-40 w-72 bg-slate-900 rounded-3xl p-4 flex flex-col">
+      {/* Logo */}
+      <div className="flex items-center gap-3 px-4 py-3 mb-2">
+        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-lime-400">
+          <Sparkles className="h-5 w-5 text-slate-900" />
         </div>
+        <span className="text-xl font-bold text-white">EML</span>
+      </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-2">
-          <ul className="space-y-1">
-            {navigation.map((item) => (
-              <li key={item.name}>
-                {item.children ? (
-                  <div>
-                    <button
-                      onClick={() => toggleExpanded(item.name)}
-                      className={cn(
-                        "w-full nav-link justify-between",
-                        isActive(item.href) && "nav-link-active"
-                      )}
-                    >
-                      <span className="flex items-center gap-3">
-                        <item.icon className="h-5 w-5" />
-                        {item.name}
-                        {item.badge && (
-                          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
-                            {item.badge}
-                          </span>
-                        )}
-                      </span>
-                      <ChevronDown
-                        className={cn(
-                          "h-4 w-4 transition-transform duration-200",
-                          expandedItems.includes(item.name) && "rotate-180"
-                        )}
-                      />
-                    </button>
-                    {expandedItems.includes(item.name) && (
-                      <ul className="mt-1 ml-4 space-y-1 border-l-2 border-sage-300 pl-4">
-                        {item.children.map((child) => (
-                          <li key={child.name}>
-                            <Link
-                              href={child.href}
-                              className={cn(
-                                "block px-4 py-2 text-sm font-medium text-slate-600 rounded-xl transition-all duration-200 hover:bg-white/60 hover:text-slate-900",
-                                pathname === child.href &&
-                                  "bg-white text-slate-900 shadow-soft"
-                              )}
-                            >
-                              {child.name}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    href={item.href}
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto py-2">
+        <ul className="space-y-1">
+          {navigation.map((item) => (
+            <li key={item.name}>
+              {item.children ? (
+                <div>
+                  <button
+                    onClick={() => toggleExpanded(item.name)}
                     className={cn(
-                      "nav-link",
-                      isActive(item.href) && "nav-link-active"
+                      "w-full flex items-center justify-between gap-3 px-4 py-2.5 text-sm font-medium rounded-2xl transition-all duration-200",
+                      isActive(item.href)
+                        ? "bg-lime-400 text-slate-900"
+                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
                     )}
                   >
-                    <item.icon className="h-5 w-5" />
-                    {item.name}
-                    {item.badge && (
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
+                    <span className="flex items-center gap-3">
+                      <item.icon className="h-5 w-5" />
+                      {item.name}
+                      {item.badge && (
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
+                          {item.badge}
+                        </span>
+                      )}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 transition-transform duration-200",
+                        expandedItems.includes(item.name) && "rotate-180"
+                      )}
+                    />
+                  </button>
+                  {expandedItems.includes(item.name) && (
+                    <ul className="mt-1 ml-4 space-y-1 border-l-2 border-slate-700 pl-4">
+                      {item.children.map((child) => (
+                        <li key={child.name}>
+                          <Link
+                            href={child.href}
+                            className={cn(
+                              "block px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200",
+                              pathname === child.href
+                                ? "bg-slate-800 text-white"
+                                : "text-slate-500 hover:bg-slate-800 hover:text-white"
+                            )}
+                          >
+                            {child.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-2xl transition-all duration-200",
+                    isActive(item.href)
+                      ? "bg-lime-400 text-slate-900"
+                      : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  {item.name}
+                  {item.badge && (
+                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white">
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-        {/* Upgrade Card */}
-        <div className="mx-2 mb-4 rounded-3xl bg-gradient-to-br from-primary-600 to-primary-700 p-5 text-white">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
-            <Sparkles className="h-6 w-6" />
+      {/* Notifications Widget */}
+      <div className="mx-2 mb-2 rounded-3xl bg-lime-400 p-5">
+        <div className="flex items-start gap-3 mb-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/10">
+            <Bell className="h-5 w-5 text-slate-900" />
           </div>
-          <h3 className="text-base font-bold mb-1">Upgrade to Pro</h3>
-          <p className="text-sm text-white/80 mb-4">
-            Unlock advanced analytics and AI features
-          </p>
-          <button className="w-full py-2.5 rounded-xl bg-lime-400 text-slate-900 font-semibold text-sm hover:bg-lime-300 transition-colors">
-            Upgrade Now
-          </button>
-        </div>
-
-        {/* User section */}
-        <div className="px-2">
-          <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/60">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-              <span className="text-sm font-bold text-white">JD</span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-slate-900 truncate">
-                John Doe
-              </p>
-              <p className="text-xs text-slate-500 truncate">Admin</p>
-            </div>
+          <div className="flex-1">
+            <h3 className="text-sm font-bold text-slate-900">3 New Alerts</h3>
+            <p className="text-xs text-slate-700 mt-0.5">
+              Requires your attention
+            </p>
           </div>
         </div>
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-xs text-slate-800">
+            <AlertCircle className="h-3.5 w-3.5" />
+            <span>Low stock: Arctic Monkeys Tee</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-800">
+            <AlertCircle className="h-3.5 w-3.5" />
+            <span>Payment pending: O2 Arena</span>
+          </div>
+        </div>
+        <button className="w-full mt-4 py-2.5 rounded-xl bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors">
+          View All
+        </button>
       </div>
     </aside>
   );

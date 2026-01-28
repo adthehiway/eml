@@ -15,8 +15,8 @@ import {
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen">
-      <Header title="Health Overview" subtitle="Take control of your business today" />
+    <div>
+      <Header title="Dashboard" />
 
       <div className="px-8 pb-8">
         {/* Bento Grid Layout */}
