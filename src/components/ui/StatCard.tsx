@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { TrendingUp, TrendingDown, Minus } from "lucide-react";
 
 interface StatCardProps {
   title: string;
@@ -8,6 +7,7 @@ interface StatCardProps {
   changeLabel?: string;
   icon?: React.ReactNode;
   trend?: "up" | "down" | "neutral";
+  className?: string;
 }
 
 export function StatCard({
@@ -17,41 +17,35 @@ export function StatCard({
   changeLabel = "vs last period",
   icon,
   trend,
+  className,
 }: StatCardProps) {
-  const getTrendColor = () => {
-    if (trend === "up") return "text-emerald-600";
-    if (trend === "down") return "text-rose-600";
-    return "text-slate-500";
-  };
-
-  const getTrendIcon = () => {
-    if (trend === "up") return <TrendingUp className="h-4 w-4" />;
-    if (trend === "down") return <TrendingDown className="h-4 w-4" />;
-    return <Minus className="h-4 w-4" />;
-  };
-
   return (
-    <div className="card p-6">
+    <div className={cn("card p-6", className)}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="stat-label">{title}</p>
-          <p className="stat-value mt-2">{value}</p>
-          {change !== undefined && (
-            <div className={cn("flex items-center gap-1 mt-2", getTrendColor())}>
-              {getTrendIcon()}
-              <span className="text-sm font-medium">
-                {change >= 0 ? "+" : ""}
-                {change.toFixed(1)}%
+          <div className="flex items-center gap-2 mb-2">
+            {icon && (
+              <span className="text-slate-400">{icon}</span>
+            )}
+            <p className="text-sm font-medium text-slate-600">{title}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <p className="text-3xl font-bold text-slate-900">{value}</p>
+            {change !== undefined && trend && (
+              <span className={cn(
+                "text-xs font-semibold px-2 py-0.5 rounded-full",
+                trend === "up" && "bg-emerald-100 text-emerald-700",
+                trend === "down" && "bg-rose-100 text-rose-700",
+                trend === "neutral" && "bg-slate-100 text-slate-600"
+              )}>
+                {change >= 0 ? "+" : ""}{change.toFixed(1)}%
               </span>
-              <span className="text-sm text-slate-400 ml-1">{changeLabel}</span>
-            </div>
+            )}
+          </div>
+          {changeLabel && change !== undefined && (
+            <p className="text-xs text-slate-400 mt-1">{changeLabel}</p>
           )}
         </div>
-        {icon && (
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-            {icon}
-          </div>
-        )}
       </div>
     </div>
   );

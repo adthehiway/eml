@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,121 +6,214 @@
 
 @layer base {
   :root {
-    --background: 248 250 252;
+    --background: 247 250 245;
     --foreground: 15 23 42;
     --card: 255 255 255;
     --card-foreground: 15 23 42;
-    --primary: 79 70 229;
+    --primary: 147 51 234;
     --primary-foreground: 255 255 255;
-    --secondary: 241 245 249;
-    --secondary-foreground: 51 65 85;
-    --muted: 241 245 249;
-    --muted-foreground: 100 116 139;
-    --accent: 241 245 249;
-    --accent-foreground: 51 65 85;
-    --destructive: 244 63 94;
-    --destructive-foreground: 255 255 255;
-    --border: 226 232 240;
-    --ring: 79 70 229;
-    --radius: 0.5rem;
+    --accent-lime: 190 242 100;
+    --radius: 1rem;
   }
 }
 
 @layer base {
   * {
-    @apply border-slate-200;
+    @apply border-sage-200;
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-sage-100 text-slate-900 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
 @layer components {
+  /* Cards - Flux style with more rounded corners */
   .card {
-    @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+    @apply bg-white rounded-3xl shadow-card border-0;
   }
 
   .card-header {
-    @apply px-6 py-4 border-b border-slate-100;
+    @apply px-6 py-5 border-b border-slate-100/50;
   }
 
   .card-body {
     @apply p-6;
   }
 
+  /* Stats - Large bold numbers */
   .stat-value {
-    @apply text-3xl font-semibold tracking-tight text-slate-900 font-mono;
+    @apply text-4xl font-bold tracking-tight text-slate-900;
+  }
+
+  .stat-value-sm {
+    @apply text-2xl font-bold tracking-tight text-slate-900;
   }
 
   .stat-label {
     @apply text-sm font-medium text-slate-500;
   }
 
+  .stat-trend-up {
+    @apply text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full;
+  }
+
+  .stat-trend-down {
+    @apply text-xs font-semibold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full;
+  }
+
+  /* Navigation - Flux style with pill active state */
   .nav-link {
-    @apply flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-600 rounded-lg transition-colors hover:bg-slate-100 hover:text-slate-900;
+    @apply flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-600 rounded-2xl transition-all duration-200 hover:bg-white/60 hover:text-slate-900;
   }
 
   .nav-link-active {
-    @apply bg-primary-50 text-primary-700 hover:bg-primary-100 hover:text-primary-800;
+    @apply bg-lime-400 text-slate-900 shadow-sm hover:bg-lime-400 hover:text-slate-900;
   }
 
+  /* Buttons */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
   }
 
   .btn-primary {
-    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+    @apply bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-900;
   }
 
   .btn-secondary {
-    @apply bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-slate-500;
+    @apply bg-white text-slate-700 shadow-soft hover:shadow-card focus:ring-slate-500;
   }
 
   .btn-ghost {
-    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus:ring-slate-500;
+    @apply text-slate-600 hover:bg-white/60 hover:text-slate-900 focus:ring-slate-500;
   }
 
+  .btn-lime {
+    @apply bg-lime-400 text-slate-900 hover:bg-lime-500 focus:ring-lime-500;
+  }
+
+  /* Input */
   .input {
-    @apply w-full px-3 py-2 text-sm border border-slate-300 rounded-lg bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+    @apply w-full px-4 py-3 text-sm border-0 rounded-2xl bg-white shadow-soft placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-lime-400;
   }
 
+  /* Badges */
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 text-xs font-medium rounded-full;
+    @apply inline-flex items-center px-3 py-1 text-xs font-semibold rounded-full;
   }
 
   .badge-success {
-    @apply bg-emerald-50 text-emerald-700;
+    @apply bg-emerald-100 text-emerald-700;
   }
 
   .badge-warning {
-    @apply bg-amber-50 text-amber-700;
+    @apply bg-amber-100 text-amber-700;
   }
 
   .badge-error {
-    @apply bg-rose-50 text-rose-700;
+    @apply bg-rose-100 text-rose-700;
   }
 
   .badge-info {
-    @apply bg-sky-50 text-sky-700;
+    @apply bg-sky-100 text-sky-700;
+  }
+
+  .badge-purple {
+    @apply bg-primary-100 text-primary-700;
+  }
+
+  .badge-dark {
+    @apply bg-slate-900 text-white;
+  }
+
+  /* Dark floating pills (like in image 2) */
+  .pill-dark {
+    @apply inline-flex items-center px-4 py-2 text-sm font-semibold rounded-2xl bg-slate-900 text-white;
+  }
+
+  /* Progress bars - rounded style */
+  .progress-bar {
+    @apply h-2 bg-slate-100 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+
+  /* Donut chart placeholder */
+  .donut-container {
+    @apply relative flex items-center justify-center;
+  }
+
+  /* Bento grid */
+  .bento-grid {
+    @apply grid gap-5;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .bento-card-sm {
+    @apply col-span-3;
+  }
+
+  .bento-card-md {
+    @apply col-span-4;
+  }
+
+  .bento-card-lg {
+    @apply col-span-6;
+  }
+
+  .bento-card-xl {
+    @apply col-span-8;
+  }
+
+  .bento-card-full {
+    @apply col-span-12;
+  }
+
+  /* Notification dot */
+  .notification-dot {
+    @apply absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-rose-500 border-2 border-white;
+  }
+
+  /* Icon containers */
+  .icon-container {
+    @apply flex items-center justify-center rounded-2xl;
+  }
+
+  .icon-container-sm {
+    @apply h-10 w-10;
+  }
+
+  .icon-container-md {
+    @apply h-12 w-12;
+  }
+
+  .icon-container-lg {
+    @apply h-14 w-14;
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - subtle */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-100;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full;
+  @apply bg-slate-300/50 rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400;
+  @apply bg-slate-400/50;
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-colors duration-200;
 }
