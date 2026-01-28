@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -17,7 +18,6 @@ import {
   Bot,
   Wallet,
   ChevronDown,
-  Sparkles,
   Bell,
   AlertCircle,
 } from "lucide-react";
@@ -166,13 +166,16 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="fixed left-4 top-4 bottom-4 z-40 w-72 bg-slate-900 rounded-3xl p-4 flex flex-col">
+    <aside className="h-full flex flex-col py-2 overflow-hidden">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-4 py-3 mb-2">
-        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-lime-400">
-          <Sparkles className="h-5 w-5 text-slate-900" />
-        </div>
-        <span className="text-xl font-bold text-white">EML</span>
+      <div className="flex-shrink-0 flex items-center gap-3 px-4 py-3 mb-2">
+        <Image
+          src="/logo.png"
+          alt="EML Logo"
+          width={120}
+          height={36}
+          className="object-contain"
+        />
       </div>
 
       {/* Navigation */}
@@ -188,7 +191,7 @@ export function Sidebar() {
                       "w-full flex items-center justify-between gap-3 px-4 py-2.5 text-sm font-medium rounded-2xl transition-all duration-200",
                       isActive(item.href)
                         ? "bg-lime-400 text-slate-900"
-                        : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                        : "text-slate-600 hover:bg-white/60 hover:text-slate-900"
                     )}
                   >
                     <span className="flex items-center gap-3">
@@ -208,7 +211,7 @@ export function Sidebar() {
                     />
                   </button>
                   {expandedItems.includes(item.name) && (
-                    <ul className="mt-1 ml-4 space-y-1 border-l-2 border-slate-700 pl-4">
+                    <ul className="mt-1 ml-4 space-y-1 border-l-2 border-slate-300 pl-4">
                       {item.children.map((child) => (
                         <li key={child.name}>
                           <Link
@@ -216,8 +219,8 @@ export function Sidebar() {
                             className={cn(
                               "block px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200",
                               pathname === child.href
-                                ? "bg-slate-800 text-white"
-                                : "text-slate-500 hover:bg-slate-800 hover:text-white"
+                                ? "bg-white/80 text-slate-900"
+                                : "text-slate-500 hover:bg-white/60 hover:text-slate-900"
                             )}
                           >
                             {child.name}
@@ -234,7 +237,7 @@ export function Sidebar() {
                     "flex items-center gap-3 px-4 py-2.5 text-sm font-medium rounded-2xl transition-all duration-200",
                     isActive(item.href)
                       ? "bg-lime-400 text-slate-900"
-                      : "text-slate-400 hover:bg-slate-800 hover:text-white"
+                      : "text-slate-600 hover:bg-white/60 hover:text-slate-900"
                   )}
                 >
                   <item.icon className="h-5 w-5" />
@@ -252,7 +255,7 @@ export function Sidebar() {
       </nav>
 
       {/* Notifications Widget */}
-      <div className="mx-2 mb-2 rounded-3xl bg-lime-400 p-5">
+      <div className="flex-shrink-0 mx-2 mb-2 rounded-3xl bg-lime-400 p-4">
         <div className="flex items-start gap-3 mb-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900/10">
             <Bell className="h-5 w-5 text-slate-900" />
@@ -277,6 +280,19 @@ export function Sidebar() {
         <button className="w-full mt-4 py-2.5 rounded-xl bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors">
           View All
         </button>
+      </div>
+
+      {/* User section */}
+      <div className="flex-shrink-0 mx-2 mt-2 p-3 rounded-2xl bg-white/50">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-lime-400 to-lime-500 flex items-center justify-center">
+            <span className="text-sm font-bold text-slate-900">JD</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-slate-900 truncate">John Doe</p>
+            <p className="text-xs text-slate-500 truncate">Admin</p>
+          </div>
+        </div>
       </div>
     </aside>
   );
