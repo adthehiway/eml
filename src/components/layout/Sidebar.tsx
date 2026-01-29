@@ -21,7 +21,7 @@ import {
   Bell,
   AlertCircle,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface NavItem {
   name: string;
@@ -150,6 +150,18 @@ export function Sidebar() {
   const pathname = usePathname();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
+  // Auto-expand menu items based on current path
+  useEffect(() => {
+    const activeParent = navigation.find(
+      (item) =>
+        item.children &&
+        (pathname === item.href || pathname.startsWith(item.href + "/"))
+    );
+    if (activeParent && !expandedItems.includes(activeParent.name)) {
+      setExpandedItems((prev) => [...prev, activeParent.name]);
+    }
+  }, [pathname]);
+
   const toggleExpanded = (name: string) => {
     setExpandedItems((prev) =>
       prev.includes(name)
@@ -166,7 +178,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="h-full flex flex-col py-2 overflow-hidden">
+    <aside className="h-full flex flex-col py-2">
       {/* Logo */}
       <div className="flex-shrink-0 flex items-center gap-3 px-4 py-3 mb-2">
         <Image

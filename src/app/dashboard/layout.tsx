@@ -10,7 +10,7 @@ export default function DashboardLayout({
       {/* Outer sage box - the "frame" that wraps everything */}
       <div className="h-full w-full bg-sage-300 rounded-[2rem] p-4 flex gap-4">
         {/* Sidebar area - left side of the sage frame */}
-        <div className="w-60 flex-shrink-0 overflow-hidden">
+        <div className="w-60 flex-shrink-0">
           <Sidebar />
         </div>
 
